@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Spining : MonoBehaviour
+public class Rotor : MonoBehaviour
 {
 	public Vector3 speed;
 

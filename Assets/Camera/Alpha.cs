@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Renderer))]
 public class Alpha : MonoBehaviour
 {
-	Material mat;
+	Material[] mat;
 
 	public float target;
 	public float accel;
@@ -12,7 +12,7 @@ public class Alpha : MonoBehaviour
 
 	void Start()
 	{
-		mat = GetComponent<Renderer>().material;
+		mat = GetComponent<Renderer>().materials;
 		if (mat == null) {
 			Debug.LogError("Alpha: material not found");
 		}
@@ -20,9 +20,17 @@ public class Alpha : MonoBehaviour
 
 	void Update()
 	{
-		float t = on? target: 0;
-		float a = mat.color.a;
+		target = Mathf.Clamp01(target);
+		foreach (Material m in mat) {
+			updateMaterial(m);
+		}
+	}
 
+	void updateMaterial(Material m)
+	{
+		float t = on? target: 0;
+		float a = m.color.a;
+		
 		if (a > t) {
 			a -= accel * Time.deltaTime;
 			if (a < t) {
@@ -34,9 +42,9 @@ public class Alpha : MonoBehaviour
 				a = t;
 			}
 		}
-
-		Color c = mat.color;
+		
+		Color c = m.color;
 		c.a = a;
-		mat.color = c;
+		m.color = c;
 	}
 }
