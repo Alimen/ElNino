@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OpeningCutscene : MonoBehaviour 
+public class Opening : MonoBehaviour 
 {
 	// Component handlers
 	public Earth earth;

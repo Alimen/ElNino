@@ -4,7 +4,7 @@ using System.Collections;
 public class Earth : MonoBehaviour
 {
 	// Manager handlers
-	public OpeningCutscene openingCutscene;
+	public Opening openingCutscene;
 
 	// Component handlers
 	public Rotor rotorX, rotorY;
