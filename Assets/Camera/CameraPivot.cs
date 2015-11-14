@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CameraPivot : MonoBehaviour 
 {
+	public Camera mainCamera;
+	public Renderer cameraMask;
+
 	Vector3 originRotation;
 	public Vector2 maxAngle;
 	public Vector2 topRollbackSpeed;
@@ -16,22 +19,26 @@ public class CameraPivot : MonoBehaviour
 
 	void Start()
 	{
-		originRotation = transform.localEulerAngles;
+		eulerAngles = transform.eulerAngles;
 	}
 
 	void OnMouseDown()
 	{
-		mouseDown = true;
-		mouseStartPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-		startRotation = transform.localEulerAngles;
-		currenntTrack.clear();
+		if (!mouseDown) {
+			mouseDown = true;
+			mouseStartPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+			startRotation = transform.eulerAngles;
+			currenntTrack.clear();
+		}
 	}
 
 	void OnMouseUp()
 	{
-		mouseDown = false;
-		speedX = new Accelerator(transform.localEulerAngles.x, accel.x, topRollbackSpeed.x, accel.x, originRotation.x);
-		speedY = new Accelerator(transform.localEulerAngles.y, accel.y, topRollbackSpeed.y, accel.y, originRotation.y);
+		if (mouseDown) {
+			mouseDown = false;
+			speedX = new Accelerator(transform.eulerAngles.x, accel.x, topRollbackSpeed.x, accel.x, originRotation.x);
+			speedY = new Accelerator(transform.eulerAngles.y, accel.y, topRollbackSpeed.y, accel.y, originRotation.y);
+		}
 	}
 
 	void Update()
@@ -41,10 +48,36 @@ public class CameraPivot : MonoBehaviour
 			Vector3 dif = currenntTrack.value - mouseStartPos;
 			float x = Mathf.Clamp(startRotation.x - dif.y * maxAngle.y, originRotation.x - maxAngle.y, originRotation.x + maxAngle.y);
 			float y = Mathf.Clamp(startRotation.y + dif.x * maxAngle.x, originRotation.y - maxAngle.x, originRotation.y + maxAngle.x);
-			transform.localEulerAngles = new Vector3(x, y, originRotation.z);
+			transform.eulerAngles = new Vector3(x, y, originRotation.z);
 
-		} else if (transform.localEulerAngles != originRotation) {
-			transform.localEulerAngles = new Vector3(speedX.step(Time.deltaTime), speedY.step(Time.deltaTime));
+		} else if (transform.eulerAngles != originRotation) {
+			transform.eulerAngles = new Vector3(speedX.step(Time.deltaTime), speedY.step(Time.deltaTime));
+		}
+	}
+
+	public Vector3 eulerAngles {
+		set {
+			originRotation = value;
+			transform.eulerAngles = originRotation;
+		}
+		get {
+			return transform.localEulerAngles;
+		}
+	}
+
+	bool _enableMouseMove = true;
+	public bool enableMouseMove {
+		set {
+			if (value != _enableMouseMove) {
+				if (_enableMouseMove) {
+					OnMouseUp();
+				}
+				_enableMouseMove = value;
+				GetComponent<Collider>().enabled = value;
+			}
+		}
+		get {
+			return _enableMouseMove;
 		}
 	}
 }

@@ -5,7 +5,7 @@ using System.Collections;
 public class StartHint : MonoBehaviour
 {
 	// Component handlers
-	public Text text;
+	public Image text;
 
 	// Start delay
 	public float delay;

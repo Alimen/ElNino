@@ -47,4 +47,14 @@ public class Alpha : MonoBehaviour
 		c.a = a;
 		m.color = c;
 	}
+
+	public void setAlpha(float a)
+	{
+		Color c;
+		foreach (Material m in mat) {
+			c = m.color;
+			c.a = a;
+			m.color = c;
+		}
+	}
 }

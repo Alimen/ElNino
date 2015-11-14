@@ -81,6 +81,8 @@ public class Earth : MonoBehaviour
 		
 		Accelerator scaleAccel = new Accelerator(1, 0.6f, 2, 0.6f, 2.1f);
 		Accelerator xAccel = new Accelerator(0, 30f, 60.0f, 30f, 30.0f);
+		openingCutscene.checkEarthCutscene();
+
 		while (Mathf.Abs(Mathf.DeltaAngle(rotorY.transform.localEulerAngles.y, 340.0f)) > Mathf.Abs(topSpeed * Time.deltaTime)) {
 			speedup();			
 			float s = scaleAccel.step(Time.deltaTime);
