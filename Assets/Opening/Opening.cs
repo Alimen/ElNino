@@ -15,14 +15,34 @@ public class Opening : MonoBehaviour
 	public Color finalSkyColor;
 
 	// Status flags
+	bool isWaitingDialogBubble = true;
+	bool isWaitingStartHint = true;
 	bool isPlayingCutscene = false;
 	bool earthCutsceneCheckpoint = false;
 	bool earthCutsceneEnds = false;
 
-	public void startCutscene()
+	void Start()
 	{
-		if (!isPlayingCutscene) {
+		StartCoroutine(waitDailogBubble());
+	}
+
+	IEnumerator waitDailogBubble()
+	{
+		while (isWaitingDialogBubble) {
+			yield return null;
+		}
+		startHint.on = true;
+		yield return new WaitForSeconds(startHint.delay);
+		isWaitingStartHint = false;
+	}
+
+	public bool startCutscene()
+	{
+		if (!isPlayingCutscene && !isWaitingStartHint) {
 			StartCoroutine(playCutscene());
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -58,6 +78,11 @@ public class Opening : MonoBehaviour
 
 		Destroy(gameObject);
 		isPlayingCutscene = false;
+	}
+
+	public void stopWaitingDialog()
+	{
+		isWaitingDialogBubble = false;
 	}
 
 	public void endEarthCutscene()

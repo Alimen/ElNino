@@ -5,11 +5,11 @@ using System.Collections;
 public class StartHint : MonoBehaviour
 {
 	// Component handlers
-	public Image text;
+	public Text text;
 
 	// Start delay
 	public float delay;
-	public bool on = true;
+	public bool on = false;
 	float delayTimer;
 
 	// Breath animation
@@ -22,16 +22,16 @@ public class StartHint : MonoBehaviour
 
 	void Update()
 	{
-		if (delayTimer > 0) {
-			delayTimer -= Time.deltaTime;
-			return;
-		}
-
 		Color c = text.color;
-		if (on) {
+		if (on) {			
+			if (delayTimer > 0) {
+				delayTimer -= Time.deltaTime;
+				return;
+			}
+
 			c.a = Mathf.Clamp01(Mathf.Sin(breathTimer) * 0.5f + 0.5f);
 			breathTimer += Time.deltaTime * 1.2f;
-		} else {
+		} else {			
 			c.a = 0;
 		}
 		text.color = c;

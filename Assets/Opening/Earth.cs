@@ -131,13 +131,12 @@ public class Earth : MonoBehaviour
 	
 	void OnMouseUp()
 	{
-		if (clickAvaialble && !isPlayingCutscene) {
+		if (openingCutscene.startCutscene()) {
 			mouseover = false;
 			clickAvaialble = false;
 			isPlayingCutscene = true;
 
 			applyMouseoverToWinds();
-			openingCutscene.startCutscene();
 			StartCoroutine(cutsceneAnim());
 		}
 	}
