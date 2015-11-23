@@ -70,7 +70,7 @@ public class Opening : MonoBehaviour
 		cameraPivot.eulerAngles = new Vector3(25, 340, 0);
 		lightPivot.eulerAngles = new Vector3(45, 0, 0);
 		yield return new WaitForSeconds(0.2f);
-		yield return Application.LoadLevelAdditiveAsync("Cut1");
+		yield return Application.LoadLevelAdditiveAsync("Game");
 		yield return null;
 		cameraMask.on = false;
 		cameraMask.setAlpha(0);
