@@ -22,27 +22,23 @@ public class CameraPivot : MonoBehaviour
 		eulerAngles = transform.localEulerAngles;
 	}
 
-	void OnMouseDown()
-	{
-		if (!mouseDown) {
-			mouseDown = true;
-			mouseStartPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-			startRotation = transform.localEulerAngles;
-			currenntTrack.clear();
-		}
-	}
-
-	void OnMouseUp()
-	{
-		if (mouseDown) {
-			mouseDown = false;
-			speedX = new Accelerator(transform.localEulerAngles.x, accel.x, topRollbackSpeed.x, accel.x, originRotation.x);
-			speedY = new Accelerator(transform.localEulerAngles.y, accel.y, topRollbackSpeed.y, accel.y, originRotation.y);
-		}
-	}
-
 	void Update()
 	{
+		if (Input.GetMouseButton(0)) {
+			if (!mouseDown) {
+				mouseDown = true;
+				mouseStartPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+				startRotation = transform.localEulerAngles;
+				currenntTrack.clear();
+			}
+		} else {
+			if (mouseDown) {
+				mouseDown = false;
+				speedX = new Accelerator(transform.localEulerAngles.x, accel.x, topRollbackSpeed.x, accel.x, originRotation.x);
+				speedY = new Accelerator(transform.localEulerAngles.y, accel.y, topRollbackSpeed.y, accel.y, originRotation.y);
+			}
+		}
+
 		if (mouseDown) {
 			currenntTrack.add(Camera.main.ScreenToViewportPoint(Input.mousePosition));
 			Vector3 dif = currenntTrack.value - mouseStartPos;
@@ -62,22 +58,6 @@ public class CameraPivot : MonoBehaviour
 		}
 		get {
 			return transform.localEulerAngles;
-		}
-	}
-
-	bool _enableMouseMove = true;
-	public bool enableMouseMove {
-		set {
-			if (value != _enableMouseMove) {
-				if (_enableMouseMove) {
-					OnMouseUp();
-				}
-				_enableMouseMove = value;
-				GetComponent<Collider>().enabled = value;
-			}
-		}
-		get {
-			return _enableMouseMove;
 		}
 	}
 }
