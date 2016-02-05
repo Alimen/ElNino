@@ -14,7 +14,7 @@ public class CameraPivot : MonoBehaviour
 	bool mouseDown = false;
 	Vector3 mouseStartPos;
 	Vector3 startRotation;
-	AverageTrack currenntTrack = new AverageTrack(10);
+	AverageTrack currenntTrack = new AverageTrack(5);
 	Accelerator speedX, speedY;
 
 	void Start()
