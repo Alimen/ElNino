@@ -8,14 +8,15 @@ public class CameraPivot : MonoBehaviour
 
 	Vector3 originRotation;
 	public Vector2 maxAngle;
-	public Vector2 topRollbackSpeed;
-	public Vector2 accel;
+	public float topRollbackSpeed;
+	public float accel;
 
 	bool mouseDown = false;
 	Vector3 mouseStartPos;
 	Vector3 startRotation;
 	AverageTrack currenntTrack = new AverageTrack(5);
-	Accelerator speedX, speedY;
+	Accelerator speed;
+	Vector3 direction;
 
 	void Start()
 	{
@@ -34,8 +35,9 @@ public class CameraPivot : MonoBehaviour
 		} else {
 			if (mouseDown) {
 				mouseDown = false;
-				speedX = new Accelerator(transform.localEulerAngles.x, accel.x, topRollbackSpeed.x, accel.x, originRotation.x);
-				speedY = new Accelerator(transform.localEulerAngles.y, accel.y, topRollbackSpeed.y, accel.y, originRotation.y);
+				direction = new Vector3(transform.localEulerAngles.x - originRotation.x, transform.localEulerAngles.y - originRotation.y, 0); 
+				speed = new Accelerator(direction.magnitude, accel, topRollbackSpeed, accel, 0);
+				direction = direction.normalized;
 			}
 		}
 
@@ -47,7 +49,7 @@ public class CameraPivot : MonoBehaviour
 			transform.localEulerAngles = new Vector3(x, y, originRotation.z);
 
 		} else if (Vector3.Distance(transform.localEulerAngles, originRotation) > 1e-4) {
-			transform.localEulerAngles = new Vector3(speedX.step(Time.deltaTime), speedY.step(Time.deltaTime));
+			transform.localEulerAngles = originRotation + direction * speed.step(Time.deltaTime);
 		}
 	}
 
