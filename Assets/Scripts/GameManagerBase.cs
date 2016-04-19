@@ -31,6 +31,7 @@ public class GameManagerBase : MonoBehaviour
 				level = "00 - Title";
 				break;
 			case 1:
+				level = "01 - Glossary";
 				break;
 			case 2:
 				level = "02 - NormalYear";
