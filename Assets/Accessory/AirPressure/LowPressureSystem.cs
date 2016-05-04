@@ -4,6 +4,7 @@ using System.Collections;
 public class LowPressureSystem : MonoBehaviour
 {
 	public Alpha low;
+	public Alpha highlight;
 	public AlphaHub hotWinds;
 	public Alpha rainCloud;
 	public AlphaHub rainDrops;
@@ -20,6 +21,7 @@ public class LowPressureSystem : MonoBehaviour
 		hotWinds.startAnim();
 		yield return new WaitForSeconds(2.0f);
 		low.on = true;
+		highlight.on = true;
 		yield return new WaitForSeconds(1.0f);
 		rainCloud.on = true;
 		yield return new WaitForSeconds(0.6f);
@@ -47,6 +49,7 @@ public class LowPressureSystem : MonoBehaviour
 		}
 		yield return new WaitForSeconds(0.5f);
 		low.on = false;
+		highlight.on = false;
 		yield return new WaitForSeconds(0.6f);
 		gameObject.SetActive(false);
 	}

@@ -5,6 +5,12 @@ public class LaNinaGame : GameManagerBase
 {
 	public StringLibrary stringLibrary;
 
+	public override void Start()
+	{
+		base.Start();
+		GameData.getRuntime().laNinaYearGameProgress = 1;
+	}
+
 	public TextTypingEffect mainUI_UpperPanel;
 	public void startUpperPanelHint(string key)
 	{

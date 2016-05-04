@@ -9,25 +9,22 @@ public class GameData : MonoBehaviour
 		if (_runtime == null) {
 			GameObject go = GameObject.Find("GameData");
 			if (go == null) {
-				go = new GameObject();
+				go = Instantiate(Resources.Load<GameObject>("GameData"));
 				go.name = "GameData";
-				_runtime = go.AddComponent<GameData>();
-			} else {
-				_runtime = go.GetComponent<GameData>();
 			}
+			_runtime = go.GetComponent<GameData>();
 		}
 		return _runtime;
 	}
 
 	void Awake()
 	{
-		if (GameData.getRuntime() != this) {
-			Destroy(gameObject);
-		} else {
-			DontDestroyOnLoad(gameObject);
-		}
+		DontDestroyOnLoad(gameObject);
 	}
 
+	public int titleProgress;
+	public int glossaryGameProgress;
 	public int normalYearGameProgress;
 	public int elNinoYearGameProgress;
+	public int laNinaYearGameProgress;
 }

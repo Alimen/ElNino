@@ -10,6 +10,7 @@ public class GlossaryGame : GameManagerBase
 	{
 		base.Start();
 		stageHash = Animator.StringToHash("stage");
+		GameData.getRuntime().glossaryGameProgress = 1;
 	}
 
 	public TextTypingEffect mainUI_LowerPannel;

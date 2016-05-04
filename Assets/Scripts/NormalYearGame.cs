@@ -125,6 +125,18 @@ public class NormalYearGame : GameManagerBase
 		seaCurrents.endAnim();
 	}
 
+	public AlphaHub seaUpCurrents;
+	public void startSeaUpCurrents()
+	{
+		seaUpCurrents.gameObject.SetActive(true);
+		seaUpCurrents.startAnim();
+	}
+
+	public void endSeaUpCurrents()
+	{
+		seaUpCurrents.endAnim();
+	}
+
 	public void clipSelect(int id)
 	{
 		if (id <= data.normalYearGameProgress) {
