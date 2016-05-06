@@ -67,18 +67,6 @@ public class ElNinoGame : GameManagerBase
 		surfaceWinds_Top.endAnim();
 	}
 
-	public AlphaHub deepfish;
-	public void startDeepfish()
-	{
-		deepfish.gameObject.SetActive(true);
-		deepfish.startAnim();
-	}
-
-	public void endDeepfish()
-	{
-		deepfish.endAnim();
-	}
-
 	public WalkerSystem walkerSystem;
 	public void startWalkerIdle()
 	{

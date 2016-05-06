@@ -4,7 +4,9 @@ using System.Collections;
 public class LaNinaAtmosphere : MonoBehaviour 
 {
 	public Alpha low;
+	public Alpha highlightLow;
 	public Alpha hi;
+	public Alpha highlightHi;
 	public AlphaHub walkerWind;
 	public Alpha[] rainClouds;
 	public AlphaHub[] rainDrops;
@@ -18,8 +20,10 @@ public class LaNinaAtmosphere : MonoBehaviour
 	IEnumerator startCoroutine()
 	{
 		low.on = true;
+		highlightLow.on = true;
 		yield return new WaitForSeconds(0.2f);
 		hi.on = true;
+		highlightHi.on = true;
 		yield return new WaitForSeconds(0.2f);
 		walkerWind.gameObject.SetActive(true);
 		walkerWind.startAnim();
@@ -49,7 +53,9 @@ public class LaNinaAtmosphere : MonoBehaviour
 		yield return new WaitForSeconds(1.1f);
 
 		low.on = false;
+		highlightLow.on = false;
 		hi.on = false;
+		highlightHi.on = false;
 		yield return new WaitForSeconds(0.6f);
 
 		gameObject.SetActive(false);
