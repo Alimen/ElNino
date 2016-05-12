@@ -6,10 +6,10 @@ function stopTimer() {
 	return t = (new Date().getTime() - startTime) / 1000;
 }
 
-var sendToGoogle = function() {
+window.onbeforeunload = function() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", "https://docs.google.com/forms/d/" + formKey + "/formResponse?entry." + entryID + "=" + stopTimer() + "&submit=Submit", true);
 	xhttp.send();
+	window.onbeforeunload = null;
+	return "esc";
 }
-
-window.onbeforeunload = sendToGoogle;
