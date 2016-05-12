@@ -16,9 +16,9 @@ public class ElNinoGame : GameManagerBase
 	}
 
 	public TextTypingEffect clipSelectHint_MainPanel;
-	public void startClipSelectHint()
+	public void startClipSelectHint(string key)
 	{
-		clipSelectHint_MainPanel.setText(stringLibrary.get("ClipSelectHint_MainPanel"));
+		clipSelectHint_MainPanel.setText(stringLibrary.get(key));
 	}
 
 	public TextTypingEffect mainUI_UpperPanel;
