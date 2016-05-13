@@ -11,5 +11,5 @@ window.onbeforeunload = function() {
 	xhttp.open("GET", "https://docs.google.com/forms/d/" + formKey + "/formResponse?entry." + entryID + "=" + stopTimer() + "&submit=Submit", true);
 	xhttp.send();
 	window.onbeforeunload = null;
-	return "esc";
+	return "資料統計 ... 完成。感謝您的參與！";
 }
