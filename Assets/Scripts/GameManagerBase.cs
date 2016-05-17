@@ -20,7 +20,9 @@ public class GameManagerBase : MonoBehaviour
 
 	public void unpause()
 	{
-		anim.speed = 1;
+		if (anim.speed < 1) {
+			anim.speed = 1;
+		}
 	}
 
 	public void loadScene(int id)
