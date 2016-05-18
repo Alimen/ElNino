@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
@@ -47,7 +48,13 @@ public class GameManagerBase : MonoBehaviour
 		}
 
 		if (!string.IsNullOrEmpty(level)) {
-			UnityEngine.SceneManagement.SceneManager.LoadScene(level);
+			SceneManager.LoadScene(level);
 		}
+	}
+
+	protected void reloadScene()
+	{
+		string scene = SceneManager.GetActiveScene().name;
+		SceneManager.LoadScene(scene);
 	}
 }

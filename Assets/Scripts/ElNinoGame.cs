@@ -94,4 +94,17 @@ public class ElNinoGame : GameManagerBase
 			unpause();
 		}
 	}
+
+	public void reset()
+	{
+		if (data.elNinoYearGameProgress > 0 && data.elNinoYearGameProgress < 4) {
+			data.elNinoYearGameProgress--;
+		}
+		base.reloadScene();
+	}
+
+	public void overwriteProgress(int i)
+	{
+		data.elNinoYearGameProgress = i;
+	}
 }

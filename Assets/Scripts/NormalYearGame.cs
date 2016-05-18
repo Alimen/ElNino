@@ -3,6 +3,7 @@ using System.Collections;
 
 public class NormalYearGame : GameManagerBase
 {
+	public Alpha cameraFilter;
 	public StringLibrary stringLibrary;
 	int stageHash;
 	int progressHash;
@@ -147,5 +148,18 @@ public class NormalYearGame : GameManagerBase
 			anim.SetInteger(stageHash, id);
 			unpause();
 		}
+	}
+
+	public void reset()
+	{
+		if (data.normalYearGameProgress > 0 && data.normalYearGameProgress < 4) {
+			data.normalYearGameProgress--;
+		}
+		base.reloadScene();
+	}
+
+	public void overwriteProgress(int i)
+	{
+		data.normalYearGameProgress = i;
 	}
 }
